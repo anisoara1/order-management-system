@@ -1,3 +1,6 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import express from "express";
 import cors from "cors";
 import { PrismaClient } from "@prisma/client";
@@ -15,15 +18,17 @@ app.get("/", (req, res) => {
 
 // Import routes
 import productsRouter from "./routes/products.js";
+import authRouter from "./routes/auth.js";
+console.log("Auth router loaded");
 /* import customersRouter from "./routes/customers.js";
 import ordersRouter from "./routes/orders.js";
-import usersRouter from "./routes/users.js"; */
+ */
 
 app.use("/products", productsRouter);
-/* app.use("/customers", customersRouter);
-app.use("/orders", ordersRouter);
+app.use("/auth", authRouter);
+/*app.use("/orders", ordersRouter);
 app.use("/users", usersRouter); */
 
-app.listen(3000, () => {
-  console.log("Server running on http://localhost:3000");
+app.listen(5000, () => {
+  console.log("Server running on http://localhost:5000");
 });

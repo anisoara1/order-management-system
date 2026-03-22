@@ -14,12 +14,13 @@ enum OrderStatus {
   DELIVERED
 }
 
+
 model User {
-  id           Int      @id @default(autoincrement())
-  username     String   @unique
-  passwordHash String
-  role         String   @default("user")
-  createdAt    DateTime @default(now())
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  role      String   @default("client")
+  createdAt DateTime @default(now())
 }
 
 model Product {
