@@ -20,7 +20,7 @@ body.light {
 body.dark {
   --bg-color: #3b3c40;
   --card-color: #2a2c31;
-  --text-color: #e6e6e6;
+  --text-color: #ffffff;
   --accent-color: #618b87;
   --border-color: #3a3c42;
 }
@@ -118,18 +118,18 @@ body.colorful {
   color: white;
 }
 
-  .sidebar {
-    position: fixed;
-    left: 0;
-    top: 60px;
-    height: calc(100vh - 60px);
-    transform: translateX(-100%);
-    z-index: 999;
-  }
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 60px;
+  height: calc(100vh - 60px);
+  transform: translateX(-100%);
+  z-index: 999;
+}
 
-  .sidebar.open {
-    transform: translateX(0);
-  }
+.sidebar.open {
+  transform: translateX(0);
+}
 
 /* CONTENT AREA */
 .content {

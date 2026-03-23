@@ -1,5 +1,5 @@
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Routes,
   Route,
   Navigate,
@@ -23,14 +23,14 @@ function App() {
     <ThemeProvider>
       <Router>
         <Routes>
-          {/* LOGIN PAGES (fără Layout) */}
+          {/* LOGIN PAGES */}
           <Route path="/login" element={<LoginPage />} />
           <Route path="/admin-login" element={<AdminLoginPage />} />
 
-          {/* REDIRECT DEFAULT */}
+          {/* DEFAULT REDIRECT */}
           <Route path="/" element={<Navigate to="/login" />} />
 
-          {/* PROTECTED ROUTES (cu Layout) */}
+          {/* PROTECTED ROUTES */}
           <Route path="/*" element={<Layout />}>
             <Route
               path="dashboard"
