@@ -9,6 +9,7 @@
 
 /* LIGHT THEME */
 body.light {
+  margin: 0;
   --bg-color: #f7f4ef;
   --card-color: #ffffff;
   --text-color: #333;
@@ -18,6 +19,7 @@ body.light {
 
 /* DARK THEME */
 body.dark {
+  margin: 0;
   --bg-color: #3b3c40;
   --card-color: #2a2c31;
   --text-color: #ffffff;
@@ -27,6 +29,7 @@ body.dark {
 
 /* COLORFUL THEME */
 body.colorful {
+  margin: 0;
   --bg-color: #faf7ff;
   --card-color: #ffffff;
   --text-color: #3a2e4d;
