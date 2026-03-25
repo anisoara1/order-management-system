@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "https://anisoara1.github.io/order-management-system/static/css/main.eab962c3.css",
-    "main.js": "https://anisoara1.github.io/order-management-system/static/js/main.74de0217.js",
+    "main.js": "https://anisoara1.github.io/order-management-system/static/js/main.f24a3b87.js",
     "index.html": "https://anisoara1.github.io/order-management-system/index.html",
     "main.eab962c3.css.map": "https://anisoara1.github.io/order-management-system/static/css/main.eab962c3.css.map",
-    "main.74de0217.js.map": "https://anisoara1.github.io/order-management-system/static/js/main.74de0217.js.map"
+    "main.f24a3b87.js.map": "https://anisoara1.github.io/order-management-system/static/js/main.f24a3b87.js.map"
   },
   "entrypoints": [
     "static/css/main.eab962c3.css",
-    "static/js/main.74de0217.js"
+    "static/js/main.f24a3b87.js"
   ]
 }
