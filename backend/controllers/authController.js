@@ -19,7 +19,13 @@ export const login = async (req, res) => {
       { expiresIn: "7d" },
     );
 
-    res.json({ token });
+    res.json({
+      token,
+      user: {
+        id: user.id,
+        email: user.email,
+      },
+    });
   } catch (err) {
     res.status(500).json({ error: "Eroare la autentificare" });
   }
