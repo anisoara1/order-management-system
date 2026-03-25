@@ -1,15 +1,13 @@
 {
   "files": {
-    "main.css": "https://anisoara1.github.io/order-management-system/static/css/main.ecfe9bef.css",
-    "main.js": "https://anisoara1.github.io/order-management-system/static/js/main.e9f55cc0.js",
-    "static/js/453.825386d9.chunk.js": "https://anisoara1.github.io/order-management-system/static/js/453.825386d9.chunk.js",
+    "main.css": "https://anisoara1.github.io/order-management-system/static/css/main.eab962c3.css",
+    "main.js": "https://anisoara1.github.io/order-management-system/static/js/main.74de0217.js",
     "index.html": "https://anisoara1.github.io/order-management-system/index.html",
-    "main.ecfe9bef.css.map": "https://anisoara1.github.io/order-management-system/static/css/main.ecfe9bef.css.map",
-    "main.e9f55cc0.js.map": "https://anisoara1.github.io/order-management-system/static/js/main.e9f55cc0.js.map",
-    "453.825386d9.chunk.js.map": "https://anisoara1.github.io/order-management-system/static/js/453.825386d9.chunk.js.map"
+    "main.eab962c3.css.map": "https://anisoara1.github.io/order-management-system/static/css/main.eab962c3.css.map",
+    "main.74de0217.js.map": "https://anisoara1.github.io/order-management-system/static/js/main.74de0217.js.map"
   },
   "entrypoints": [
-    "static/css/main.ecfe9bef.css",
-    "static/js/main.e9f55cc0.js"
+    "static/css/main.eab962c3.css",
+    "static/js/main.74de0217.js"
   ]
 }
