@@ -1,0 +1,36 @@
+/* CONTAINER GENERAL */
+.layout {
+  display: flex;
+  min-height: 100vh;
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* CONȚINUTUL PRINCIPAL */
+.content {
+  flex: 1;
+  padding: 20px;
+  background: var(--bg-color);
+  color: var(--text-color);
+  transition: 0.3s ease;
+}
+
+/* PAGINA INTERIOARĂ */
+.page-content {
+  margin-top: 20px;
+}
+
+/* CÂND SIDEBARUL ESTE DESCHIS PE MOBIL,
+   CLICK PE CONTENT ÎL ÎNCHIDE */
+.content.overlay {
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+/* RESPONSIVE — SIDEBAR ESTE MEREU OFF-CANVAS */
+@media (max-width: 2000px) {
+  /* Sidebar nu împinge niciodată layoutul */
+  .content {
+    margin-left: 0;
+  }
+}

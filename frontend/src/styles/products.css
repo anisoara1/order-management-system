@@ -1,0 +1,89 @@
+.products-page {
+  padding: 20px;
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* Titlu pagină */
+.page-title {
+  font-size: 26px;
+  margin-bottom: 20px;
+  color: var(--accent-secondary);
+}
+
+/* GRID PRODUSE */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+/* CARD PRODUS */
+.product-card {
+  background: var(--card-color);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transition: 0.25s ease;
+  text-align: center;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-color);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Icon produs */
+.product-icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+/* Titlu produs */
+.product-card h3 {
+  margin: 0;
+  font-size: 18px;
+  color: var(--accent-secondary);
+}
+
+/* Preț */
+.price {
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+/* Stoc */
+.stock {
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.stock.low {
+  color: #e6a100; /* galben cald */
+}
+
+.stock.out {
+  color: #d9534f; /* roșu cald */
+}
+
+/* Buton editare */
+.edit-btn {
+  margin-top: 15px;
+  padding: 10px 14px;
+  background: var(--accent-color);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-size: 15px;
+  transition: 0.2s ease;
+}
+
+.edit-btn:hover {
+  background: var(--accent-secondary);
+}

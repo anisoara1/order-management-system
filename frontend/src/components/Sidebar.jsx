@@ -1,81 +1,29 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import "../styles/sidebar.css";
 
 export default function Sidebar({ isOpen, closeSidebar }) {
-  const [role, setRole] = useState(localStorage.getItem("role"));
-
-  useEffect(() => {
-    const updateRole = () => {
-      setRole(localStorage.getItem("role"));
-    };
-
-    window.addEventListener("storage", updateRole);
-    return () => window.removeEventListener("storage", updateRole);
-  }, []);
-
   return (
     <aside className={`sidebar ${isOpen ? "open" : ""}`}>
-      <ul>
-        {role === "admin" && (
-          <>
-            <li>
-              <Link to="/admin" onClick={closeSidebar}>
-                Admin Dashboard
-              </Link>
-            </li>
-            <li>
-              <Link to="/products" onClick={closeSidebar}>
-                Produse
-              </Link>
-            </li>
-            <li>
-              <Link to="/customers" onClick={closeSidebar}>
-                Clienți
-              </Link>
-            </li>
-            <li>
-              <Link to="/orders" onClick={closeSidebar}>
-                Comenzi
-              </Link>
-            </li>
-          </>
-        )}
+      <div className="sidebar-header">
+        <h2 className="logo">MyShop</h2>
+        <button className="close-btn" onClick={closeSidebar}>
+          ×
+        </button>
+      </div>
 
-        {role === "vendor" && (
-          <>
-            <li>
-              <Link to="/vendor" onClick={closeSidebar}>
-                Panou Vânzător
-              </Link>
-            </li>
-            <li>
-              <Link to="/products" onClick={closeSidebar}>
-                Produsele mele
-              </Link>
-            </li>
-            <li>
-              <Link to="/orders" onClick={closeSidebar}>
-                Comenzi primite
-              </Link>
-            </li>
-          </>
-        )}
+      <nav className="sidebar-links">
+        <NavLink to="/dashboard" onClick={closeSidebar}>
+          <span className="icon">📊</span> Dashboard
+        </NavLink>
 
-        {role === "client" && (
-          <>
-            <li>
-              <Link to="/client" onClick={closeSidebar}>
-                Contul meu
-              </Link>
-            </li>
-            <li>
-              <Link to="/orders" onClick={closeSidebar}>
-                Comenzile mele
-              </Link>
-            </li>
-          </>
-        )}
-      </ul>
+        <NavLink to="/products" onClick={closeSidebar}>
+          <span className="icon">📦</span> Products
+        </NavLink>
+
+        <NavLink to="/orders" onClick={closeSidebar}>
+          <span className="icon">🧾</span> Orders
+        </NavLink>
+      </nav>
     </aside>
   );
 }

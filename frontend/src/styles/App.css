@@ -1,0 +1,42 @@
+.layout {
+  display: flex;
+  min-height: 100vh;
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* Sidebar fix pe stânga */
+.sidebar {
+  width: 260px;
+  background: var(--card-color);
+  border-right: 1px solid var(--border-color);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  padding: 20px;
+}
+
+/* Conținutul se mută în dreapta sidebarului */
+.content {
+  flex: 1;
+  margin-left: 260px;
+  padding: 20px;
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    left: -260px;
+    transition: 0.3s ease;
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+
+  .content {
+    margin-left: 0;
+  }
+}

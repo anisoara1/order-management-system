@@ -1,55 +1,36 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
 generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
-  provider = "sqlite"
-  url = env("DATABASE_URL")
-}
-
-enum OrderStatus {
-  PENDING
-  APPROVED
-  SHIPPED
-  DELIVERED
-}
-
-
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  password  String
-  role      String   @default("client")
-  createdAt DateTime @default(now())
+  id       String   @id @default(uuid())
+  email    String   @unique
+  password String
 }
 
 model Product {
-  id        Int      @id @default(autoincrement())
+  id        Int         @id @default(autoincrement())
   name      String
   price     Float
   stock     Int
-  createdAt DateTime @default(now())
-  items     OrderItem[]
-}
-
-model Customer {
-  id        Int      @id @default(autoincrement())
-  name      String
-  email     String   @unique
-  phone     String?
-  createdAt DateTime @default(now())
-  orders    Order[]
+  createdAt DateTime    @default(now())
+  items     OrderItem[] // ← RELAȚIA INVERSĂ OBLIGATORIE
 }
 
 model Order {
-  id          Int          @id @default(autoincrement())
-  customerId  Int
-  status      OrderStatus  @default(PENDING)
-  totalAmount Float        @default(0)
-  createdAt   DateTime     @default(now())
-
-  customer    Customer     @relation(fields: [customerId], references: [id])
-  items       OrderItem[]
+  id              Int         @id @default(autoincrement())
+  customerName    String
+  customerPhone   String
+  customerAddress String
+  total           Float
+  status          String      @default("new")
+  createdAt       DateTime    @default(now())
+  items           OrderItem[]
 }
 
 model OrderItem {
@@ -57,9 +38,8 @@ model OrderItem {
   orderId   Int
   productId Int
   quantity  Int
-  unitPrice Float
-  lineTotal Float
+  price     Float
 
-  order     Order   @relation(fields: [orderId], references: [id])
-  product   Product @relation(fields: [productId], references: [id])
+  product Product @relation(fields: [productId], references: [id])
+  order   Order   @relation(fields: [orderId], references: [id])
 }

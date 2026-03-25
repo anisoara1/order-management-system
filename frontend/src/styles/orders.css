@@ -1,0 +1,76 @@
+.orders-page {
+  padding: 20px;
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* Titlu pagină */
+.page-title {
+  font-size: 26px;
+  margin-bottom: 20px;
+  color: var(--accent-secondary);
+}
+
+/* LISTĂ COMENZI */
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* CARD COMANDĂ */
+.order-card {
+  background: var(--card-color);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 18px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transition: 0.25s ease;
+}
+
+.order-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent-color);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* INFO COMANDĂ */
+.order-info h3 {
+  margin: 0;
+  font-size: 18px;
+  color: var(--accent-secondary);
+}
+
+.customer,
+.total {
+  margin: 4px 0;
+  font-size: 15px;
+}
+
+/* STATUS */
+.status {
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: capitalize;
+}
+
+/* STATUSURI COLORATE */
+.status.pending {
+  background: #ffe8a3;
+  color: #8a6d00;
+}
+
+.status.shipped {
+  background: #c8f7c5;
+  color: #1b7a1b;
+}
+
+.status.cancelled {
+  background: #f7c5c5;
+  color: #8a1b1b;
+}

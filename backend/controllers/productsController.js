@@ -1,25 +1,13 @@
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+import prisma from "../prisma/client.js";
 
-export const getAllProducts = async (req, res) => {
+export const getProducts = async (req, res) => {
   try {
-    const products = await prisma.product.findMany();
+    const products = await prisma.product.findMany({
+      orderBy: { createdAt: "desc" },
+    });
     res.json(products);
-  } catch (error) {
-    res.status(500).json({ error: "Failed to fetch products" });
-  }
-};
-
-export const getProductById = async (req, res) => {
-  try {
-    const id = Number(req.params.id);
-    const product = await prisma.product.findUnique({ where: { id } });
-
-    if (!product) return res.status(404).json({ error: "Product not found" });
-
-    res.json(product);
   } catch {
-    res.status(500).json({ error: "Failed to fetch product" });
+    res.status(500).json({ error: "Eroare la preluarea produselor" });
   }
 };
 
@@ -28,12 +16,16 @@ export const createProduct = async (req, res) => {
     const { name, price, stock } = req.body;
 
     const product = await prisma.product.create({
-      data: { name, price: Number(price), stock: Number(stock) },
+      data: {
+        name,
+        price: Number(price),
+        stock: Number(stock),
+      },
     });
 
-    res.json(product);
+    res.status(201).json(product);
   } catch {
-    res.status(500).json({ error: "Failed to create product" });
+    res.status(500).json({ error: "Eroare la crearea produsului" });
   }
 };
 
@@ -44,12 +36,16 @@ export const updateProduct = async (req, res) => {
 
     const product = await prisma.product.update({
       where: { id },
-      data: { name, price: Number(price), stock: Number(stock) },
+      data: {
+        name,
+        price: Number(price),
+        stock: Number(stock),
+      },
     });
 
     res.json(product);
   } catch {
-    res.status(500).json({ error: "Failed to update product" });
+    res.status(500).json({ error: "Eroare la actualizarea produsului" });
   }
 };
 
@@ -59,8 +55,8 @@ export const deleteProduct = async (req, res) => {
 
     await prisma.product.delete({ where: { id } });
 
-    res.json({ message: "Product deleted" });
+    res.json({ message: "Produs șters" });
   } catch {
-    res.status(500).json({ error: "Failed to delete product" });
+    res.status(500).json({ error: "Eroare la ștergerea produsului" });
   }
 };

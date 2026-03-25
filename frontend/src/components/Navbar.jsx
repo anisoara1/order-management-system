@@ -1,31 +1,23 @@
 import { useContext } from "react";
 import { ThemeContext } from "../context/ThemeContext";
+import "../styles/navbar.css";
 
 export default function Navbar({ toggleSidebar }) {
   const { setTheme } = useContext(ThemeContext);
 
-  const role = localStorage.getItem("role");
-  const email = localStorage.getItem("email");
-
   return (
-    <nav className="navbar">
+    <header className="navbar">
       <button className="menu-btn" onClick={toggleSidebar}>
         ☰
       </button>
 
-      <div className="theme-buttons">
-        <button onClick={() => setTheme("light")}>Light</button>
-        <button onClick={() => setTheme("dark")}>Dark</button>
-        <button onClick={() => setTheme("colorful")}>Colorful</button>
-      </div>
+      <h1 className="navbar-title">MyShop Dashboard</h1>
 
-      <div className="welcome">
-        {role && email && (
-          <span>
-            Bine ai venit, {role}: {email}
-          </span>
-        )}
+      <div className="theme-buttons">
+        <button onClick={() => setTheme("light")}>☀️</button>
+        <button onClick={() => setTheme("dark")}>🌙</button>
+        <button onClick={() => setTheme("colorful")}>🎨</button>
       </div>
-    </nav>
+    </header>
   );
 }

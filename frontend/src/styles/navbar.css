@@ -1,0 +1,62 @@
+.navbar {
+  height: 60px;
+  background: var(--card-color);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  color: var(--text-color);
+  position: sticky;
+  top: 0;
+  z-index: 1500;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Titlu */
+.navbar-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--accent-secondary);
+  margin: 0;
+}
+
+/* Buton meniu (mobil) */
+.menu-btn {
+  background: none;
+  border: none;
+  font-size: 26px;
+  color: var(--text-color);
+  cursor: pointer;
+  padding: 4px;
+  display: block;
+}
+
+@media (min-width: 769px) {
+  .menu-btn {
+    display: none;
+  }
+}
+
+/* Butoane temă */
+.theme-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.theme-buttons button {
+  background: var(--card-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: 0.2s ease;
+}
+
+.theme-buttons button:hover {
+  background: var(--accent-color);
+  color: white;
+  border-color: var(--accent-color);
+}

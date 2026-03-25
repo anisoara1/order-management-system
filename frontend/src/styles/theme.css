@@ -1,0 +1,24 @@
+:root {
+  --bg-color: #faf7f2; /* crem cald */
+  --card-color: #ffffff; /* alb curat */
+  --text-color: #3a2f2a; /* maro foarte închis */
+  --accent-color: #f0c599; /* caramel cald */
+  --accent-secondary: #bda186; /* caramel mai închis */
+  --border-color: #e6dcd2; /* bej deschis */
+}
+[data-theme="dark"] {
+  --bg-color: #4b4952; /* gri cărbune cald */
+  --card-color: #363638; /* gri movaliu */
+  --text-color: #f2e9e9; /* alb cald */
+  --accent-color: #feb8cb; /* roz prăfuit */
+  --accent-secondary: #e2b7c2; /* roz prăfuit mai închis */
+  --border-color: #4a464d; /* gri movaliu */
+}
+[data-theme="colorful"] {
+  --bg-color: #eefbea; /* verde foarte deschis */
+  --card-color: #ffffff; /* alb curat */
+  --text-color: #2e2a35; /* mov închis */
+  --accent-color: #8462d1; /* mov pastel */
+  --accent-secondary: #8e74ce; /* mov mai intens */
+  --border-color: #c9eac0; /* verde pastel */
+}

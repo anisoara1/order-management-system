@@ -1,118 +1,60 @@
-import { useState } from "react";
-import { loginUser, registerUser } from "../api/auth";
+import { useState, useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
+import { login as apiLogin } from "../api/auth";
 import { useNavigate } from "react-router-dom";
-import "../styles/LoginPage.css";
+import "../styles/login.css";
 
 export default function LoginPage() {
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const [mode, setMode] = useState("login"); // login sau register
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("client");
-  const [message, setMessage] = useState("");
 
-  // VALIDARE SIMPLĂ
-  const validate = () => {
-    if (!email.includes("@")) return "Email invalid";
-    if (password.length < 6) return "Parola trebuie să aibă minim 6 caractere";
-    return null;
-  };
-
-  // LOGIN
-  const handleLogin = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const error = validate();
-    if (error) return setMessage(error);
-
     try {
-      const res = await loginUser({ email, password });
-      const token = res.data.token;
-      const role = res.data.role;
+      console.log("Sending login request:", email, password);
 
-      localStorage.setItem("token", token);
-      localStorage.setItem("role", role);
-      localStorage.setItem("email", email);
+      const data = await apiLogin(email, password);
 
-      if (role === "vendor") navigate("/vendor");
-      else navigate("/client");
+      console.log("Backend response:", data);
+
+      login(data.token, data.role, data.email);
+
+      // redirect după login
+      navigate("/dashboard");
     } catch (err) {
-      setMessage(err.response?.data?.error || "Eroare la autentificare");
-    }
-  };
-
-  // REGISTER
-  const handleRegister = async (e) => {
-    e.preventDefault();
-
-    const error = validate();
-    if (error) return setMessage(error);
-
-    try {
-      await registerUser({ email, password, role });
-
-      setMessage("Cont creat cu succes! Te poți autentifica.");
-      navigate("/login");
-    } catch (err) {
-      setMessage(err.response?.data?.error || "Eroare la înregistrare");
+      console.log("Login error:", err.response?.data || err.message);
+      alert("Invalid credentials");
     }
   };
 
   return (
-    <div className="login-wrapper">
-      <div className="login-card">
-        <h2>{mode === "login" ? "Autentificare" : "Creează cont"}</h2>
+    <div className="login-container">
+      <div className="login-box">
+        <h2>Welcome Back</h2>
 
-        {mode === "login" ? (
-          <form onSubmit={handleLogin}>
-            <input
-              type="email"
-              placeholder="Email"
-              onChange={(e) => setEmail(e.target.value)}
-            />
+        <form onSubmit={handleSubmit}>
+          <input
+            type="email"
+            placeholder="Email address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
 
-            <input
-              type="password"
-              placeholder="Parola"
-              onChange={(e) => setPassword(e.target.value)}
-            />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
 
-            <button>Login</button>
-          </form>
-        ) : (
-          <form onSubmit={handleRegister}>
-            <input
-              type="email"
-              placeholder="Email"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-
-            <input
-              type="password"
-              placeholder="Parola"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-
-            <select onChange={(e) => setRole(e.target.value)}>
-              <option value="client">Client</option>
-              <option value="vendor">Comerciant</option>
-            </select>
-
-            <button>Înregistrare</button>
-          </form>
-        )}
-
-        <p className="message">{message}</p>
-
-        <button
-          className="toggle-btn"
-          onClick={() => setMode(mode === "login" ? "register" : "login")}
-        >
-          {mode === "login"
-            ? "Nu ai cont? Creează unul"
-            : "Ai deja cont? Autentifică-te"}
-        </button>
+          <button type="submit">Login</button>
+        </form>
       </div>
     </div>
   );
