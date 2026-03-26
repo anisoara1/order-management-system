@@ -71,3 +71,10 @@ export const resetAdminPassword = async (req, res) => {
     res.status(500).json({ error: "Nu s-a putut reseta parola" });
   }
 };
+
+router.get("/debug-admin", async (req, res) => {
+  const admin = await prisma.user.findUnique({
+    where: { email: "admin@admin.com" },
+  });
+  res.json(admin);
+});
