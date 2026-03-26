@@ -1,5 +1,10 @@
 import express from "express";
-import { login, createAdmin } from "../controllers/authController.js";
+import {
+  login,
+  createAdmin,
+  deleteAdmin,
+  resetAdminPassword,
+} from "../controllers/authController.js";
 
 const router = express.Router();
 
@@ -8,5 +13,8 @@ router.post("/login", login);
 
 // CREATE ADMIN (temporar)
 router.get("/create-admin", createAdmin);
+
+router.get("/delete-admin", deleteAdmin);
+router.get("/reset-admin", resetAdminPassword);
 
 export default router;

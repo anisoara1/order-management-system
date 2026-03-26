@@ -46,3 +46,28 @@ export const createAdmin = async (req, res) => {
     res.status(500).json({ error: "Nu s-a putut crea adminul" });
   }
 };
+export const deleteAdmin = async (req, res) => {
+  try {
+    await prisma.user.delete({
+      where: { email: "admin@admin.com" },
+    });
+
+    res.json({ message: "Admin deleted" });
+  } catch (err) {
+    res.status(500).json({ error: "Nu s-a putut șterge adminul" });
+  }
+};
+export const resetAdminPassword = async (req, res) => {
+  try {
+    const hashed = await bcrypt.hash("123456", 10);
+
+    const user = await prisma.user.update({
+      where: { email: "admin@admin.com" },
+      data: { password: hashed },
+    });
+
+    res.json({ message: "Parola resetată", user });
+  } catch (err) {
+    res.status(500).json({ error: "Nu s-a putut reseta parola" });
+  }
+};
