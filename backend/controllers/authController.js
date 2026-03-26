@@ -30,3 +30,19 @@ export const login = async (req, res) => {
     res.status(500).json({ error: "Eroare la autentificare" });
   }
 };
+export const createAdmin = async (req, res) => {
+  try {
+    const hashed = await bcrypt.hash("123456", 10);
+
+    const user = await prisma.user.create({
+      data: {
+        email: "admin@admin.com",
+        password: hashed,
+      },
+    });
+
+    res.json({ message: "Admin created", user });
+  } catch (err) {
+    res.status(500).json({ error: "Nu s-a putut crea adminul" });
+  }
+};
