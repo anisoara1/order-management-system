@@ -3,11 +3,15 @@ dotenv.config();
 
 import express from "express";
 import cors from "cors";
-;
-
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  }),
+);
 app.use(express.json());
 const PORT = process.env.PORT || 5000;
 
@@ -22,13 +26,11 @@ import authRouter from "./routes/auth.js";
 import ordersRouter from "./routes/orders.js";
 import dashboardRouter from "./routes/dashboard.js";
 
-
 // Register routes
 app.use("/products", productsRouter);
 app.use("/auth", authRouter);
 app.use("/orders", ordersRouter);
 app.use("/dashboard", dashboardRouter);
-
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
