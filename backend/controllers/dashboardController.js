@@ -1,58 +1,56 @@
-import prisma from "../prisma/client.js";
-
-export const getDashboardStats = async (req, res) => {
+router.get("/dashboard", async (req, res) => {
   try {
+    const totalProducts = await prisma.product.count();
     const totalOrders = await prisma.order.count();
-    const newOrders = await prisma.order.count({ where: { status: "new" } });
+    const newOrders = await prisma.order.count({
+      where: { status: "new" },
+    });
 
-    const revenueAgg = await prisma.order.aggregate({
+    const revenue = await prisma.order.aggregate({
       _sum: { total: true },
     });
 
-    const totalProducts = await prisma.product.count();
-
-    const lowStockProducts = await prisma.product.findMany({
-      where: { stock: { lt: 5 } },
-      orderBy: { stock: "asc" },
-      take: 10,
+    const topProductsRaw = await prisma.orderItem.groupBy({
+      by: ["productId"],
+      _sum: { quantity: true },
+      orderBy: { _sum: { quantity: "desc" } },
+      take: 5,
     });
+
+    const topProducts = await Promise.all(
+      topProductsRaw.map(async (tp) => {
+        const product = await prisma.product.findUnique({
+          where: { id: tp.productId },
+        });
+        return {
+          id: product.id,
+          name: product.name,
+          sold: tp._sum.quantity,
+        };
+      }),
+    );
 
     const recentOrders = await prisma.order.findMany({
       orderBy: { createdAt: "desc" },
       take: 5,
     });
 
-    const topProducts = await prisma.product.findMany({
-      orderBy: { stock: "asc" }, // fallback dacă nu ai sold
-      take: 5,
-    });
-
-    // SAFE sales last 7 days (fără groupBy)
-    const sevenDaysAgo = new Date();
-    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
-
-    const salesLast7Days = await prisma.order.findMany({
-      where: { createdAt: { gte: sevenDaysAgo } },
-      orderBy: { createdAt: "asc" },
-      select: {
-        createdAt: true,
-        total: true,
-      },
+    const lowStockItems = await prisma.product.findMany({
+      where: { stock: { lt: 5 } },
+      orderBy: { stock: "asc" },
     });
 
     res.json({
       totalProducts,
       totalOrders,
       newOrders,
-      totalRevenue: revenueAgg._sum.total || 0,
-      lowStock: lowStockProducts.length,
-      lowStockItems: lowStockProducts,
-      recentOrders,
+      totalRevenue: revenue._sum.total || 0,
       topProducts,
-      salesLast7Days,
+      recentOrders,
+      lowStockItems,
     });
   } catch (err) {
-    console.error("Dashboard error:", err);
-    res.status(500).json({ error: "Eroare la încărcarea dashboard-ului" });
+    console.error(err);
+    res.status(500).json({ error: "Dashboard error" });
   }
-};
+});
