@@ -1,4 +1,10 @@
-router.get("/dashboard", async (req, res) => {
+import express from "express";
+import prisma from "../prisma/client.js";
+import { auth } from "../middleware/auth.js";
+
+const router = express.Router();
+
+router.get("/", auth, async (req, res) => {
   try {
     const totalProducts = await prisma.product.count();
     const totalOrders = await prisma.order.count();
@@ -54,3 +60,5 @@ router.get("/dashboard", async (req, res) => {
     res.status(500).json({ error: "Dashboard error" });
   }
 });
+
+export default router;
