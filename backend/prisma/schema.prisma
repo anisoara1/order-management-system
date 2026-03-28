@@ -12,13 +12,14 @@ model User {
   email    String   @unique
   password String
 }
+
 model Product {
   id        Int         @id @default(autoincrement())
-  name      String
+  name      String      @unique
   price     Float
   stock     Int
   createdAt DateTime    @default(now())
-  items     OrderItem[] // ← RELAȚIA INVERSĂ OBLIGATORIE
+  items     OrderItem[]
 }
 
 model Order {

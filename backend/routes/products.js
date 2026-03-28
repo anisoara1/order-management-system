@@ -8,6 +8,10 @@ import {
 } from "../controllers/productsController.js";
 
 const router = express.Router();
+router.use((req, res, next) => {
+  res.set("Cache-Control", "no-store");
+  next();
+});
 
 router.use(authMiddleware);
 
