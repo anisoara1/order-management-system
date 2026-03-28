@@ -10,8 +10,8 @@
   --bg-color: #4b4952; /* gri cărbune cald */
   --card-color: #363638; /* gri movaliu */
   --text-color: #f2e9e9; /* alb cald */
-  --accent-color: #feb8cb; /* roz prăfuit */
-  --accent-secondary: #e2b7c2; /* roz prăfuit mai închis */
+  --accent-color: #f7c948; /* roz prăfuit */
+  --accent-secondary: #c89b00; /* roz prăfuit mai închis */
   --border-color: #4a464d; /* gri movaliu */
 }
 [data-theme="colorful"] {

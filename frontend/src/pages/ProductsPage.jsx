@@ -1,23 +1,23 @@
 import { useEffect, useState } from "react";
-import api from "../api/api";
 import "../styles/products.css";
-
+import { getProducts } from "../services/productsService";
 export default function ProductsPage() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    api
-      .get("/products")
-      .then((res) => {
-        console.log("Products from backend:", res.data);
-        setProducts(res.data);
-        setLoading(false);
-      })
-      .catch((err) => {
+    const load = async () => {
+      try {
+        const data = await getProducts();
+        setProducts(data);
+      } catch (err) {
         console.error("Products error:", err);
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+
+    load();
   }, []);
 
   if (loading) return <p>Loading products...</p>;

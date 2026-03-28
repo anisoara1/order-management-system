@@ -21,8 +21,7 @@ export default function LoginPage() {
 
       console.log("Backend response:", data);
 
-      login(data.token, data.role, data.email);
-
+      login(data.token, data.user.email, data.user.id);
       // redirect după login
       navigate("/dashboard");
     } catch (err) {

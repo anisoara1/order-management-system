@@ -21,15 +21,25 @@
   margin: 0;
 }
 
-/* Buton meniu (mobil) */
 .menu-btn {
-  background: none;
-  border: none;
-  font-size: 26px;
+  background: var(--card-color);
+  border: 1px solid var(--border-color);
   color: var(--text-color);
+  font-size: 22px;
   cursor: pointer;
-  padding: 4px;
-  display: block;
+  padding: 8px 10px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.menu-btn:hover {
+  background: var(--accent-color);
+  color: white;
+  border-color: var(--accent-color);
 }
 
 @media (min-width: 769px) {
@@ -37,7 +47,6 @@
     display: none;
   }
 }
-
 /* Butoane temă */
 .theme-buttons {
   display: flex;
