@@ -1,4 +1,16 @@
 import prisma from "./client.js";
+import bcrypt from "bcryptjs";
+
+const passwordHash = await bcrypt.hash("123456", 10);
+
+await prisma.user.upsert({
+  where: { email: "admin@admin.com" },
+  update: {},
+  create: {
+    email: "admin@admin.com",
+    password: passwordHash,
+  },
+});
 
 async function main() {
   // Produse software
